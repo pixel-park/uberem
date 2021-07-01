@@ -92,14 +92,13 @@ function b3Hover(event){
             plusCheck({delay: 0.2});   
            setPlan = setTimeout(function(){ 
                 if(reset && !bChoveredImage.classList.contains('show_points')){
-                    reset = false;
+                   
                     for(i of allBcImages){
                         if(i.classList.contains('show_points')){                   
                             imageWrapper.insertAdjacentElement('beforeend', i);            
                         }
                     } 
                     imageWrapper.insertAdjacentElement('beforeend', bChoveredImage);
-
                 } else {
                     imageWrapper.insertAdjacentElement('beforeend', bChoveredImage);
                 }
@@ -109,8 +108,11 @@ function b3Hover(event){
                     }   
                         i.style.animation = 'unset';
                 }
-                    bChoveredImage.classList.add('b3_img_on');
-                    bChoveredImage.style.animation = 'slide_in 1s ease-in-out 0s 1 forwards';
+                if(!bChoveredImage.classList.contains('b3_img_on') || !reset){
+                        bChoveredImage.classList.add('b3_img_on');
+                        bChoveredImage.style.animation = 'slide_in 1s ease-in-out 0s 1 forwards'
+                    }
+                reset = false;
                 bCunhovered = false;
                 clearTimeout(setPlan); 
             },100)
@@ -118,7 +120,6 @@ function b3Hover(event){
         }  
         return;
     }
-    
     if(!event.target.classList.contains('b3_left_box') && !bCunhovered){   
         selectedTitleC.classList.remove('faded');
         if(!bChoveredImage.classList.contains('show_points')){
@@ -136,7 +137,7 @@ function b3Hover(event){
             }
             for(i of allBcImages){
                 if(i.classList.contains('show_points')){                   
-                     bChoveredImage.insertAdjacentElement('beforebegin', i);            
+                     bChoveredImage.insertAdjacentElement('beforebegin', i);           
                 }
             } 
         }   
